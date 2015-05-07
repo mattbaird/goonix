@@ -8,7 +8,7 @@ import (
 type Disk struct {
 }
 
-func (d *Disk) DiskSpace(path string) (uint64, error) {
+func (d *Disk) Space(path string) (uint64, error) {
 
 	exists, err := d.Exists(path)
 	if err != nil {
