@@ -36,6 +36,28 @@ func (d *Disk) IsDirectory(path string) (bool, error) {
 	return mode.IsDir(), err
 }
 
+// current user
+func (d *Disk) HasWritePermission(path string) (bool, error) {
+	_, err := d.Exists(path)
+	if err != nil {
+		return false, err
+	}
+	return syscall.Access(path, 2) == nil, nil
+}
+
+func (d *Disk) NamedUserHasWritePermission(user, path string) (bool, error) {
+	// execute namei -l /usr/local
+	// get results that should look like this:
+	//f: /home/matthew
+	//drwxr-xr-x root    root    /
+	//drwxr-xr-x root    root    home
+	//drwxr-xr-x matthew matthew matthew
+	// read last line
+	//
+	return false, nil
+}
+
+// works for paths and files
 func (d *Disk) Exists(path string) (bool, error) {
 	_, err := os.Stat(path)
 	if err == nil {
