@@ -24,9 +24,9 @@ func (u *User) exists(id, file string) (bool, error) {
 	arg1 := fmt.Sprintf("egrep -i \"^%s\" %s", id, file)
 	cmd := exec.Command(app, arg0, arg1)
 	out, err := cmd.CombinedOutput()
-	printCommand(cmd)
-	printError(err)
-	printOutput(out)
+	//	printCommand(cmd)
+	//	printError(err)
+	//	printOutput(out)
 	if err == nil {
 		if len(out) == 0 {
 			return false, fmt.Errorf("ID %s not found in file %s", id, file)
